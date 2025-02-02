@@ -254,5 +254,28 @@
 			});
 
 		}
-
+		$(document).ready(function() {
+			$("#contactForm").on("submit", function(event) {
+				event.preventDefault(); // Prevent default form submission
+		
+				let form = $(this);
+				let formData = form.serialize(); // Get form data
+		
+				$.ajax({
+					url: form.attr("action"),
+					method: "POST",
+					data: formData,
+					dataType: "json",
+					success: function(response) {
+						alert("Message sent successfully! ✅");
+						form[0].reset(); // Clear form fields
+					},
+					error: function(error) {
+						alert("Something went wrong. ❌");
+						console.error("Error:", error);
+					}
+				});
+			});
+		});
+		
 })(jQuery);

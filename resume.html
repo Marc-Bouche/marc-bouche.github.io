@@ -27,7 +27,6 @@
 						<ul class="links">
 							<li><a href="index.html">Projects</a></li>
 							<li class="active"><a href="generic.html">Resume</a></li>
-							<li><a href="visualizations.html">Visualizations</a></li>
 						</ul>
 						<ul class="icons">
 							<li><a href="https://www.linkedin.com/in/marc-bouche/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
@@ -69,39 +68,66 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
-							<form method="post" action="#">
+							<form id="contactForm" action="https://formspree.io/f/mdkazlqo" method="POST">
 								<div class="fields">
 									<div class="field">
 										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
+										<input type="text" id="name" name="name" placeholder="Your Name" required>
 									</div>
 									<div class="field">
 										<label for="email">Email</label>
-										<input type="text" name="email" id="email" />
+										<input type="email" id="email" name="email" placeholder="Your Email" required>
 									</div>
 									<div class="field">
 										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="3"></textarea>
+										<textarea id="message" name="message" placeholder="Your Message" rows="3" required></textarea>
 									</div>
 								</div>
 								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
+									<li><button type="submit" id="sendMessageBtn">Send Message</button></li>
 								</ul>
+								<p id="successMessage" style="display: none; color: green; font-weight: bold;">✅ Message sent successfully!</p>
 							</form>
+							
+							<script>
+							document.getElementById("contactForm").addEventListener("submit", function(event) {
+								event.preventDefault(); // Prevent default form submission
+								
+								var form = this;
+								var formData = new FormData(form);
+								
+								fetch(form.action, {
+									method: form.method,
+									body: formData,
+									headers: { "Accept": "application/json" }
+								}).then(response => {
+									if (response.ok) {
+										document.getElementById("successMessage").style.display = "block"; // Show success message
+										form.reset(); // Clear the form fields
+									} else {
+										alert("❌ Failed to send message. Please try again.");
+									}
+								}).catch(error => {
+									alert("❌ Error: " + error);
+								});
+							});
+							</script>
+							
 						</section>
+
 						<section class="split contact">
 							<section class="alt">
 								<h3>Address</h3>
-								<p>10557 Berlin <br />
-								Germany</p>
+								<p>10557 Berlin <br />Germany</p>
 							</section>
 							<section>
 								<h3>Phone</h3>
-								<p><a href="#">(+49) 015560 450112</a></p>
+								<p><a href="tel:+49015560450112">📞 (+49) 015560 450112</a></p>
 							</section>
 							<section>
 								<h3>Email</h3>
-								<p><a href="#">mbouch17@gmail.com</a></p>
+								<p><a href="mailto:mbouch17@gmail.com">📩 mbouch17@gmail.com</a></p>
+
 							</section>
 							<section>
 								<h3>Social</h3>
@@ -112,7 +138,6 @@
 							</section>
 						</section>
 					</footer>
-
 				<!-- Copyright -->
 					<div id="copyright">
 						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
