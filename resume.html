@@ -223,6 +223,30 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			<script>
+				document.addEventListener("DOMContentLoaded", function () {
+				  const btnEN = document.getElementById("download-cv-en");
+				  const btnFR = document.getElementById("download-cv-fr");
+			  
+				  if (btnEN) {
+					btnEN.addEventListener("click", function () {
+					  posthog.capture("CV Download Clicked", {
+						language: "English",
+						location: window.location.pathname
+					  });
+					});
+				  }
+			  
+				  if (btnFR) {
+					btnFR.addEventListener("click", function () {
+					  posthog.capture("CV Download Clicked", {
+						language: "French",
+						location: window.location.pathname
+					  });
+					});
+				  }
+				});
+			  </script>
+			  
 	</body>
 </html>
