@@ -230,7 +230,7 @@
 			  
 				  if (btnEN) {
 					btnEN.addEventListener("click", function () {
-					  posthog.capture("CV Download", {
+					  posthog.capture("CV Downloaded", {
 						language: "English",
 						location: window.location.pathname
 					  });
@@ -239,7 +239,7 @@
 			  
 				  if (btnFR) {
 					btnFR.addEventListener("click", function () {
-					  posthog.capture("CV Download", {
+					  posthog.capture("CV Downloaded", {
 						language: "French",
 						location: window.location.pathname
 					  });
