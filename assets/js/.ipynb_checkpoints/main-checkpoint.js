@@ -61,22 +61,6 @@
 				}
 			});
 		});
-		// ✅ Track English CV download
-		$("#download-cv-en").on("click", function () {
-			posthog.capture("CV Download Clicked", {
-				language: "English",
-				location: window.location.pathname
-			});
-		});
-
-		// ✅ Track French CV download
-		$("#download-cv-fr").on("click", function () {
-			posthog.capture("CV Download Clicked", {
-				language: "French",
-				location: window.location.pathname
-			});
-		});
-
 
 		// ✅ Tableau Visualization Integration
 		var divElement = document.getElementById("viz171232");
