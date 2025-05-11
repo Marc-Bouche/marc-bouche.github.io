@@ -257,6 +257,44 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			<script>
+				document.addEventListener("DOMContentLoaded", function () {
+				  // Track phone click
+				  const phoneLink = document.querySelector('a[href^="tel:"]');
+				  if (phoneLink) {
+					phoneLink.addEventListener("click", function () {
+					  posthog.capture("Contact_Phone", {
+						page: window.location.pathname,
+						number: phoneLink.getAttribute("href").replace("tel:", "")
+					  });
+					});
+				  }
+			  
+				  // Track email click
+				  const emailLink = document.querySelector('a[href^="mailto:"]');
+				  if (emailLink) {
+					emailLink.addEventListener("click", function () {
+					  posthog.capture("Contact_Email", {
+						page: window.location.pathname,
+						email: emailLink.getAttribute("href").replace("mailto:", "")
+					  });
+					});
+				  }
+			  
+				  // Track GitHub and LinkedIn clicks
+				  const socialLinks = document.querySelectorAll('a[href*="github.com"], a[href*="linkedin.com"]');
+				  socialLinks.forEach(link => {
+					link.addEventListener("click", function () {
+					  const url = link.getAttribute("href");
+					  const platform = url.includes("github.com") ? "GitHub" : "LinkedIn";
+					  posthog.capture("Social_Link", {
+						platform: platform,
+						url: url,
+						page: window.location.pathname
+					  });
+					});
+				  });
+				});
+			  </script>
 	</body>
 </html>
