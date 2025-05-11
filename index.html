@@ -336,21 +336,23 @@
 					  });
 					});
 				  }
-			  
-				  // Track GitHub and LinkedIn clicks
-				  const socialLinks = document.querySelectorAll('a[href*="github.com"], a[href*="linkedin.com"]');
-				  socialLinks.forEach(link => {
-					link.addEventListener("click", function () {
-					  const url = link.getAttribute("href");
-					  const platform = url.includes("github.com") ? "GitHub" : "LinkedIn";
-					  posthog.capture("Social_Link", {
-						platform: platform,
-						url: url,
-						page: window.location.pathname
-					  });
+				  // Track GitHub and LinkedIn clicks (EXCLUDE project links)
+					const socialLinks = document.querySelectorAll('a[href*="github.com"], a[href*="linkedin.com"]');
+					socialLinks.forEach(link => {
+					const href = link.getAttribute("href");
+					const isProject = href.includes("marc-bouche.github.io") || href.includes("cinematic-insights") || href.includes("spotify-song-recommendation") || href.includes("customer-personality-analysis") || href.includes("vanguard-cx-team") || href.includes("rain-in-australia-supervised-learning");
+
+					if (!isProject) {
+						link.addEventListener("click", function () {
+						const platform = href.includes("github.com") ? "GitHub" : "LinkedIn";
+						posthog.capture("Social_Link", {
+							platform: platform,
+							url: href,
+							page: window.location.pathname
+						});
+						});
+					}
 					});
-				  });
-				});
 			  </script>
 			  <script>
 				document.addEventListener("DOMContentLoaded", function () {
