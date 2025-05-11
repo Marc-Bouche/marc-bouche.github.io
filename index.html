@@ -352,5 +352,30 @@
 				  });
 				});
 			  </script>
+			  <script>
+				document.addEventListener("DOMContentLoaded", function () {
+				  const projectLinks = [
+					{ selector: 'a[href*="boston-marathon-analysis"]', event: "BostonMarathon_Navigation" },
+					{ selector: 'a[href*="cinematic-insights"]', event: "CinematicInsights_Navigation" },
+					{ selector: 'a[href*="customer-personality-analysis"]', event: "CustomerPersonality_Navigation" },
+					{ selector: 'a[href*="vanguard-cx-team"]', event: "VanguardAB_Navigation" },
+					{ selector: 'a[href*="rain-in-australia-supervised-learning"]', event: "RainPrediction_Navigation" },
+					{ selector: 'a[href*="spotify-song-recommendation"]', event: "SpotifyRecommendation_Navigation" },
+					{ selector: 'a[href*="vizzes"]', event: "TableauVisualizations_Navigation" }
+				  ];
+				
+				  projectLinks.forEach(item => {
+					const links = document.querySelectorAll(item.selector);
+					links.forEach(link => {
+					  link.addEventListener("click", function () {
+						posthog.capture(item.event, {
+						  page: window.location.pathname,
+						  url: link.getAttribute("href")
+						});
+					  });
+					});
+				  });
+				});
+				</script>				
 	</body>
 </html>
