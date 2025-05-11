@@ -336,8 +336,9 @@
 					  });
 					});
 				  }
-				  // Track only header/footer GitHub & LinkedIn links
-					const socialIcons = document.querySelectorAll('a.icon.brands');
+				  // Track only HEADER and FOOTER social icons (exclude project cards)
+					const socialIcons = document.querySelectorAll('#nav .icon.brands, #footer .icon.brands');
+
 					socialIcons.forEach(link => {
 					link.addEventListener("click", function () {
 						const url = link.getAttribute("href");
